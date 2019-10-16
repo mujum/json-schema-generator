@@ -1,0 +1,6 @@
+# Gradle folders
+/.gradle/
+/gradle/
+
+# Intellij IDEA folders
+/.idea/

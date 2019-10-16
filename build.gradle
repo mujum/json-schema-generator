@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'maven-publish'
+    id 'maven'
+}
+
+group = 'com.github.mujum'
+version = '0.1-SNAPSHOT'
+
+ext {
+    jsonVersion = "2.10.0"
+    junitVersion = "5.2.0"
+    lombokVersion = "1.18.10"
+    swaggerVersion = "2.9.2"
+    swaggerModelsVersion = "2.0.9"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform() {
+        includeEngines 'junit-jupiter'
+    }
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+dependencies {
+    /// Documentation dependencies
+    compile "io.swagger.core.v3:swagger-models:${swaggerModelsVersion}"
+    compile "io.springfox:springfox-swagger2:${swaggerVersion}"
+    ///
+
+    /// JSON dependencies
+    compile "com.fasterxml.jackson.core:jackson-databind:${jsonVersion}"
+    ///
+
+    /// Annotation dependencies
+    compile "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor ("org.projectlombok:lombok:${lombokVersion}")
+
+    // Тесты
+    testCompile "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:$junitVersion"
+}
